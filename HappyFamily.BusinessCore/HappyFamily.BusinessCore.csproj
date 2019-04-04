@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="sqlSugarCore" Version="4.9.9.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HappyFamily.Enties\HappyFamily.Enties.csproj">
+      <Name>HappyFamily.Enties</Name>
+      <Project>{aebc552b-1991-45e6-bfa8-fb7b98d425b0}</Project>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
