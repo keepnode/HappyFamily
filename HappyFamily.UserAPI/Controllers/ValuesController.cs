@@ -10,13 +10,21 @@ namespace HappyFamily.UserAPI.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        /// <summary>
+        /// 列表
+        /// </summary>
+        /// <returns></returns>
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };
         }
-
+        /// <summary>
+        /// 获取单个实体
+        /// </summary>
+        /// <param name="id">主键</param>
+        /// <returns></returns>
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
