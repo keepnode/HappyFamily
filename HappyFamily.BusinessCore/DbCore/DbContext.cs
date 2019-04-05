@@ -34,6 +34,8 @@ public class DbContext<T> where T : class, new()
    public SimpleClient<Sys_Menu> Sys_MenuDb { get { return new SimpleClient<Sys_Menu>(Db); } }//用来处理Sys_Menu表的常用操作
    public SimpleClient<Sys_RoleAuthorize> Sys_RoleAuthorizeDb { get { return new SimpleClient<Sys_RoleAuthorize>(Db); } }//用来处理Sys_RoleAuthorize表的常用操作
    public SimpleClient<Sys_Area> Sys_AreaDb { get { return new SimpleClient<Sys_Area>(Db); } }//用来处理Sys_Area表的常用操作
+   public SimpleClient<Sys_User> Sys_UserDb { get { return new SimpleClient<Sys_User>(Db); } }//用来处理Sys_User表的常用操作
+   public SimpleClient<Sys_UserLogOn> Sys_UserLogOnDb { get { return new SimpleClient<Sys_UserLogOn>(Db); } }//用来处理Sys_UserLogOn表的常用操作
 
 
    /// <summary>
