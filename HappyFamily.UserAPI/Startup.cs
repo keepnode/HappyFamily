@@ -57,6 +57,14 @@ namespace HappyFamily.UserAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //在开发环境使用swagger，线上不使用
+                app.UseSwagger();
+
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "HappyFamily API");
+                    c.RoutePrefix = string.Empty;
+                });
             }
             else
             {
@@ -66,13 +74,6 @@ namespace HappyFamily.UserAPI
 
             app.UseHttpsRedirection();
 
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HappyFamily API");
-                c.RoutePrefix = string.Empty;
-            });
 
             app.UseMvc();
         }
