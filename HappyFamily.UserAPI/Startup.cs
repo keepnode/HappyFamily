@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace HappyFamily.UserAPI
 {
@@ -26,6 +27,22 @@ namespace HappyFamily.UserAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = "HappyFamily API",
+                    Version = "v1",
+                    Description = ".Net Core快速开发框架，后台API",
+                    Contact = new Contact
+                    {
+                        Email = "ibliveicando@gmail.com",
+                        Name = "keepnode",
+                        Url = "https://github.com/keepnode"
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +59,14 @@ namespace HappyFamily.UserAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HappyFamily API");
+                c.RoutePrefix = string.Empty;
+            });
             app.UseMvc();
         }
     }
