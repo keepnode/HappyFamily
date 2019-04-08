@@ -13,26 +13,26 @@ public class Sys_OrganizeManager : DbContext<Sys_Organize>
     /// <param name="pageSize"></param>
     /// <param name="totalNumber"></param>
     /// <returns></returns>
-    public List<Sys_Organize> PageList(string fullName,string mobilePhone,int pageIndex,int pageSize,ref int totalNumber)
+    public List<Sys_Organize> PageList(string fullName, string mobilePhone, int pageIndex, int pageSize, ref int totalNumber)
     {
-        var query = Db.Queryable<Sys_Organize>().WhereIF(!string.IsNullOrEmpty(fullName),a=>a.F_FullName.Contains(fullName));
-        query = query.WhereIF(!string.IsNullOrEmpty(mobilePhone),a=>a.F_MobilePhone==mobilePhone);
+        var query = Db.Queryable<Sys_Organize>().WhereIF(!string.IsNullOrEmpty(fullName), a => a.F_FullName.Contains(fullName));
+        query = query.WhereIF(!string.IsNullOrEmpty(mobilePhone), a => a.F_MobilePhone == mobilePhone);
         return query.Where(a => a.F_DeleteMark == false).ToPageList(pageIndex, pageSize, ref totalNumber);
     }
- 
+
     //当前类已经继承了 DbContext增、删、查、改的方法
 
     //这里面写的代码不会给覆盖,如果要重新生成请删除 Sys_OrganizeManager.cs
 
-    
+
     #region 教学方法
     /// <summary>
     /// 如果DbContext中的增删查改方法满足不了你，你可以看下具体用法
     /// </summary>
     public void Study()
     {
-	     
-	   /*********查询*********/
+
+        /*********查询*********/
 
         var data1 = Sys_OrganizeDb.GetById(1);//根据ID查询
         var data2 = Sys_OrganizeDb.GetList();//查询所有
@@ -45,7 +45,7 @@ public class Sys_OrganizeManager : DbContext<Sys_Organize>
 
         var data6 = Sys_OrganizeDb.GetPageList(it => 1 == 1, p, it => SqlFunc.GetRandom(), OrderByType.Asc);// 分页查询加排序
         Console.Write(p.PageCount);//返回总数
-     
+
         List<IConditionalModel> conModels = new List<IConditionalModel>(); //组装条件查询作为条件实现 分页查询加排序
         conModels.Add(new ConditionalModel() { FieldName = typeof(Sys_Organize).GetProperties()[0].Name, ConditionalType = ConditionalType.Equal, FieldValue = "1" });//id=1
         var data7 = Sys_OrganizeDb.GetPageList(conModels, p, it => SqlFunc.GetRandom(), OrderByType.Asc);
@@ -55,8 +55,8 @@ public class Sys_OrganizeManager : DbContext<Sys_Organize>
         //我要用事务
         var result = Db.Ado.UseTran(() =>
          {
-            //写事务代码
-        });
+             //写事务代码
+         });
         if (result.IsSuccess)
         {
             //事务成功
@@ -76,8 +76,8 @@ public class Sys_OrganizeManager : DbContext<Sys_Organize>
 
 
 
-		/*********更新*********/
-	    var updateData = new Sys_Organize() {  };//测试参数
+        /*********更新*********/
+        var updateData = new Sys_Organize() { };//测试参数
         var updateArray = new Sys_Organize[] { updateData };//测试参数
         Sys_OrganizeDb.Update(updateData);//根据实体更新
         Sys_OrganizeDb.UpdateRange(updateArray);//批量更新
@@ -86,16 +86,16 @@ public class Sys_OrganizeManager : DbContext<Sys_Organize>
 
 
 
-		/*********删除*********/
-	    var deldata = new Sys_Organize() {  };//测试参数
+        /*********删除*********/
+        var deldata = new Sys_Organize() { };//测试参数
         Sys_OrganizeDb.Delete(deldata);//根据实体删除
         Sys_OrganizeDb.DeleteById(1);//根据主键删除
-        Sys_OrganizeDb.DeleteById(new int[] { 1,2});//根据主键数组删除
-        Sys_OrganizeDb.Delete(it=>1==2);//根据条件删除
-        Sys_OrganizeDb.AsDeleteable().Where(it=>1==2).ExecuteCommand();//转成Deleteable实现复杂的操作
-    } 
+        Sys_OrganizeDb.DeleteById(new int[] { 1, 2 });//根据主键数组删除
+        Sys_OrganizeDb.Delete(it => 1 == 2);//根据条件删除
+        Sys_OrganizeDb.AsDeleteable().Where(it => 1 == 2).ExecuteCommand();//转成Deleteable实现复杂的操作
+    }
     #endregion
 
- 
- 
+
+
 }
