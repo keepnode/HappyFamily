@@ -15,9 +15,18 @@ namespace HappyFamily.UserAPI.Controllers
         private readonly Sys_OrganizeManager sys_OrganizeManager = new Sys_OrganizeManager();
         // GET: api/Organizes
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<object> Get(string FullName,string MobilePhone,int PageIndex,int PageSize)
         {
-            return new string[] { "value1", "value2" };
+            int totalNumber = 0;
+            var dataList = sys_OrganizeManager.PageList(FullName, MobilePhone, PageIndex, PageSize, ref totalNumber);
+
+            return Ok(new
+            {
+                success=true,
+                page=PageIndex,
+                pageCount=totalNumber,
+                data=dataList
+            });
         }
 
         // GET: api/Organizes/5
