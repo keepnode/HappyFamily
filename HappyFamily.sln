@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyFamily.BusinessCore", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyFamily.UserIdentityServer", "HappyFamily.UserIdentityServer\HappyFamily.UserIdentityServer.csproj", "{E839ED52-4D38-45D8-B56C-9F392C2ECF95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyFamily.Common", "HappyFamily.Common\HappyFamily.Common.csproj", "{065A0D53-5C1B-4C71-BDBE-E20DBA58053F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{E839ED52-4D38-45D8-B56C-9F392C2ECF95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E839ED52-4D38-45D8-B56C-9F392C2ECF95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E839ED52-4D38-45D8-B56C-9F392C2ECF95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{065A0D53-5C1B-4C71-BDBE-E20DBA58053F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{065A0D53-5C1B-4C71-BDBE-E20DBA58053F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{065A0D53-5C1B-4C71-BDBE-E20DBA58053F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{065A0D53-5C1B-4C71-BDBE-E20DBA58053F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

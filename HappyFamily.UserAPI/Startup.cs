@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -30,6 +31,10 @@ namespace HappyFamily.UserAPI
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            //添加options
+            services.AddOptions();
+            
+            #region swagger配置
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
@@ -49,6 +54,28 @@ namespace HappyFamily.UserAPI
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+            #endregion
+
+            #region CsRedis配置
+
+            var csRedisConfigurationList = Configuration.GetSection("RedisConfigurations").Get<List<Models.RedisConfiguration>>();
+            
+            int csRedisCount = csRedisConfigurationList.Count;
+            var csRedisConfigurationArrayList = new string[csRedisCount];
+            int tempRedisConfigurationIndex = 0;
+            foreach (var item in csRedisConfigurationList)
+            {
+                csRedisConfigurationArrayList[tempRedisConfigurationIndex] = $"{item.Ip}:{item.Port},password={item.Password},defaultDatabase={item.DefaultDatabase},poolsize={item.PoolSize}";
+            }
+            //配置Redis客户端
+            var csRedisClient=new CSRedis.CSRedisClient(string.Empty,csRedisConfigurationArrayList);
+            //初始化RedisHelper
+            RedisHelper.Initialization(csRedisClient);
+            //注册MVC分布式缓存
+            services.AddSingleton<IDistributedCache>(
+                new Microsoft.Extensions.Caching.Redis.CSRedisCache(RedisHelper.Instance));
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
